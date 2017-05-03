@@ -16,14 +16,20 @@
 
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/motorola/potter/full_potter.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # for specific
+$(call inherit-product, device/motorola/potter/full_potter.mk)
 $(call inherit-product, vendor/motorola/potter/potter-vendor.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit common product files.
+$(call inherit-product, vendor/xenonhd/config/common_full_phone.mk)
+
+ROOT_METHOD=magisk
+
+PRODUCT_PACKAGES += \
+    Adaway \
+    KernelAdiutor
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
@@ -31,9 +37,11 @@ TARGET_SCREEN_HEIGHT := 1920
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := potter
-PRODUCT_NAME := lineage_potter
+PRODUCT_NAME := xenonhd_potter
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
+
+PRODUCT_PROPERTY_OVERRIDES += ro.xenonhd.maintainer="Vachounet"
 
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := ro.product.model
 
