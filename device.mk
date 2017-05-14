@@ -113,9 +113,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
 
-# CMActions
+# Gestures
 PRODUCT_PACKAGES += \
-    CMActions
+    Gestures
 
 # Display
 PRODUCT_PACKAGES += \
