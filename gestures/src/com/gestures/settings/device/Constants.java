@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.settings.device;
+package com.gestures.settings.device;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import org.gestures.settings.FileUtils;
+import com.gestures.settings.device.FileUtils;
 
 public class Constants {
 
