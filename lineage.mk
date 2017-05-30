@@ -19,4 +19,8 @@
 
 $(call inherit-product, device/motorola/potter/full_potter.mk)
 
+# Time Zone data for recovery
+PRODUCT_COPY_FILES += \
+    bionic/libc/zoneinfo/tzdata:root/system/usr/share/zoneinfo/tzdata
+
 PRODUCT_NAME := lineage_potter
