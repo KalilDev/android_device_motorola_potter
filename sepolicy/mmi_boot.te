@@ -12,5 +12,6 @@ allow mmi_boot radio_data_file:file rw_file_perms;
 allow mmi_boot self:capability chown;
 allow mmi_boot self:capability dac_override;
 allow mmi_boot sysfs_socinfo:file write;
+allow mmi_boot system_file:file execute_no_trans;
 
 set_prop(mmi_boot, hw_rev_prop);
