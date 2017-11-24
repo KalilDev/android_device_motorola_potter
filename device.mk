@@ -179,6 +179,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
 
+PRODUCT_PACKAGES += android.hidl.manager-V1.0-java
+
 # GPS
 PRODUCT_PACKAGES += \
     libgps.utils \

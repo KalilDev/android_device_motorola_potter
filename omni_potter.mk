@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+$(call inherit-product, device/motorola/potter/core_32_64_bit.mk)
+
 # Get the prebuilt list of APNs
 $(call inherit-product, vendor/omni/config/gsm.mk)
 
 # Inherit from the common Open Source product configuration
-$(call inherit-product, device/motorola/potter/core_32_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 # must be before including omni part
