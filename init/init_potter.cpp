@@ -70,6 +70,10 @@ void vendor_load_properties()
     std::string sku = property_get("ro.boot.hardware.sku");
     property_override("ro.product.model", sku.c_str());
 
+    // fingerprint
+    property_override("ro.build.description", "potter-7.0/NPNS25.137-33-11/11:user/release-keys");
+    property_override("ro.build.fingerprint", "motorola/potter/potter:7.0/NPNS25.137-33-11/11:user/release-keys");
+
     // rmt_storage
     std::string device = property_get("ro.boot.device");
     std::string radio = property_get("ro.boot.radio");
