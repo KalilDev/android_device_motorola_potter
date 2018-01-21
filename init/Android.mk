@@ -8,6 +8,7 @@ LOCAL_CPPFLAGS := -Wall -DANDROID_TARGET=\"$(TARGET_BOARD_PLATFORM)\"
 LOCAL_SRC_FILES := init_potter.cpp
 LOCAL_MODULE := libinit_potter
 LOCAL_STATIC_LIBRARIES := \
-    libbase
+    libbase \
+    libselinux
 
 include $(BUILD_STATIC_LIBRARY)
