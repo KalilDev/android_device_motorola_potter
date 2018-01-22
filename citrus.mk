@@ -16,9 +16,6 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-# Get the prebuilt list of APNs
-$(call inherit-product, vendor/omni/config/gsm.mk)
-
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
@@ -26,7 +23,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 TARGET_BOOTANIMATION_SIZE := 1080p
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/citrus/common.mk)
+$(call inherit-product, vendor/citrus/config/common_la.um.mk)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/motorola/potter/device.mk)
@@ -38,7 +36,7 @@ TARGET_SCREEN_HEIGHT := 1920
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := potter
-PRODUCT_NAME := omni_potter
+PRODUCT_NAME := citrus_potter
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
 
