@@ -69,7 +69,7 @@ void vendor_load_properties()
         return;
 
     std::string sku = android::base::GetProperty("ro.boot.hardware.sku", "");
-    android::init::property_set("ro.product.model", sku.c_str());
+    property_override("ro.product.model", sku.c_str());
 
     // rmt_storage
     std::string device = android::base::GetProperty("ro.boot.device", "");
