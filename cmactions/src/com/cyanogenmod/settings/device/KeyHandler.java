@@ -200,6 +200,23 @@ public class KeyHandler implements DeviceKeyHandler {
             Settings.Global.putString(context.getContentResolver(), Settings.Global.SINGLE_HAND_MODE, "");
     }
 
+    private boolean isInLockTaskMode() {
+        try {
+            return ActivityManagerNative.getDefault().isInLockTaskMode();
+        } catch (RemoteException e) {
+            // ignore
+        }
+        return false;
+    }
+
+    private void exitScreenPinningMode() {
+        try {
+            ActivityManagerNative.getDefault().stopSystemLockTaskMode();
+        } catch (RemoteException e) {
+            // ignore
+        }
+    }
+
     private static void switchToLastApp(Context context) {
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -517,7 +534,12 @@ public class KeyHandler implements DeviceKeyHandler {
                 }
                 break;
             case FP_HOLD_SCANCODE:
-                action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_HOLD_NODE)));
+                if (isInLockTaskMode()){
+                    doHapticFeedbackFP(false);
+                    exitScreenPinningMode();
+                }else{
+                    action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_HOLD_NODE)));
+                }
                 break;
             case FP_RIGHT_SCANCODE:
                 action = str2int(FileUtils.readOneLine(getFPNodeBasedOnScreenState(FP_KEY_RIGHT_NODE)));
@@ -538,11 +560,15 @@ public class KeyHandler implements DeviceKeyHandler {
         if (isDoubleTap && action != ACTION_CAMERA && action != ACTION_FLASHLIGHT) {
             isHapticFeedbackEnabledOnFP = false;
         }
-        if (isHapticFeedbackEnabledOnFP && (action == ACTION_CAMERA || action == ACTION_FLASHLIGHT)) {
-            vibrate(action == ACTION_CAMERA ? 500 : 250);
+        if (isHapticFeedbackEnabledOnFP){
+            if (!isInLockTaskMode() && (action == ACTION_CAMERA || action == ACTION_FLASHLIGHT)) {
+                vibrate(action == ACTION_CAMERA ? 500 : 250);
+            }else if (isInLockTaskMode() || action != ACTION_VOICE_ASSISTANT) {
+                doHapticFeedbackFP(false);
+            }
         }
-        if (isHapticFeedbackEnabledOnFP && action == ACTION_POWER) {
-            doHapticFeedbackFP(false);
+        if (isInLockTaskMode() && (action == ACTION_HOME || action == ACTION_RECENTS || action == ACTION_VOICE_ASSISTANT || action == ACTION_CAMERA || action == ACTION_LAST_APP)) {
+            return;
         }
         switch (action) {
             case ACTION_HOME:
