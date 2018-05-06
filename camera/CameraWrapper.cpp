@@ -67,8 +67,8 @@ static struct hw_module_methods_t camera_module_methods = {
 camera_module_t HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
-        .version_major = CAMERA_MODULE_API_VERSION_1_0,
-        .version_minor = HARDWARE_HAL_API_VERSION,
+        .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
+        .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = CAMERA_HARDWARE_MODULE_ID,
         .name = "Moto Camera Wrapper",
         .author = "The LineageOS Project",
@@ -440,6 +440,11 @@ static char *camera_get_parameters(struct camera_device *device)
 
 static void camera_put_parameters(struct camera_device *device, char *params)
 {
+    if (device) {
+        ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
+                (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
+    }
+
     if (params)
         free(params);
 }
