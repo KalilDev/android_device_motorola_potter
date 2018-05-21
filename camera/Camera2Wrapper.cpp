@@ -69,6 +69,7 @@ static char * camera2_fixup_getparams(int id, const char * settings)
     params.dump();
 #endif
 
+    params.set("longshot-supported", "false");
     params.set("video-stabilization-supported", "false");
 
     android::String8 strParams = params.flatten();
