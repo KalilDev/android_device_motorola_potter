@@ -37,4 +37,7 @@ PRODUCT_ENFORCE_RRO_TARGETS := \
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := ro.product.model
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME="Moto G5 Plus"
+    PRODUCT_NAME="Moto G5 Plus" \
+    PRIVATE_BUILD_DESC="potter-7.0/NPNS25.137-33-11/11:user/release-keys"
+
+BUILD_FINGERPRINT := motorola/potter/potter:7.0/NPNS25.137-33-11/11:user/release-keys
