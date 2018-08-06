@@ -68,6 +68,22 @@ void num_sims() {
     }
 }
 
+void load_cedric(const char *model) {
+    property_override("ro.product.model", model);
+    property_override("ro.build.product", "Moto G5");
+    property_override("ro.product.device", "Moto G5");
+    property_override("ro.build.description", "cedric-7.0/NPPS25.137-72-4/4:user/release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/cedric/cedric:7.0/NPPS25.137-72-4/4:user/release-keys");
+}
+
+ void load_potter(const char *model) {
+    property_override("ro.product.model", model);
+    property_override("ro.build.product", "Moto G5 Plus");
+    property_override("ro.product.device", "Moto G5 Plus");
+    property_override("ro.build.description", "potter-7.0/NPNS25.137-33-11/11:user/release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/potter/potter:7.0/NPNS25.137-33-11/11:user/release-keys");
+}
+
 void vendor_load_properties()
 {
     std::string platform = android::base::GetProperty("ro.board.platform", "");
