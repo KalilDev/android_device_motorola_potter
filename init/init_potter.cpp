@@ -68,22 +68,6 @@ void num_sims() {
     }
 }
 
-void load_cedric(const char *model) {
-    property_override("ro.product.model", model);
-    property_override("ro.build.product", "Moto G5");
-    property_override("ro.product.device", "Moto G5");
-    property_override("ro.build.description", "cedric-7.0/NPPS25.137-72-4/4:user/release-keys");
-    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/cedric/cedric:7.0/NPPS25.137-72-4/4:user/release-keys");
-}
-
- void load_potter(const char *model) {
-    property_override("ro.product.model", model);
-    property_override("ro.build.product", "Moto G5 Plus");
-    property_override("ro.product.device", "Moto G5 Plus");
-    property_override("ro.build.description", "potter-7.0/NPNS25.137-33-11/11:user/release-keys");
-    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/potter/potter:7.0/NPNS25.137-33-11/11:user/release-keys");
-}
-
 void vendor_load_properties()
 {
     std::string platform = android::base::GetProperty("ro.board.platform", "");
@@ -95,10 +79,6 @@ void vendor_load_properties()
     std::string sku = android::base::GetProperty("ro.boot.hardware.sku", "");
     property_override_dual("ro.product.model", "ro.vendor.product.model", sku.c_str());
 
-    // fingerprint
-    property_override("ro.build.description", "potter-7.0/NPNS25.137-33-11/11:user/release-keys");
-    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/potter/potter:7.0/NPNS25.137-33-11/11:user/release-keys");
-
     // rmt_storage
     std::string device = android::base::GetProperty("ro.boot.device", "");
     std::string radio = android::base::GetProperty("ro.boot.radio", "");
@@ -108,6 +88,28 @@ void vendor_load_properties()
     property_set("ro.hw.imager", "12MP");
 
     num_sims();
+
+	static const unsigned cedric = (sku == XT1670) | (sku == XT1671) | (sku == XT1672) | (sku == XT1673) | (sku == XT1674) | (sku == XT1675) | (sku == XT1676) | (sku == XT1677);
+
+    if (sku == cedric) {
+	// cedric
+    property_override("ro.product.model", "cedric");
+    property_override("ro.build.product", "Moto G5");
+    property_override("ro.product.device", "Moto G5");
+	// fingerprint
+	property_override("ro.build.description", "cedric-7.0/NPPS25.137-72-4/4:user/release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/cedric/cedric:7.0/NPPS25.137-72-4/4:user/release-keys");
+    }
+    else {
+	// potter
+    property_override("ro.product.model", "potter");
+    property_override("ro.build.product", "Moto G5 Plus");
+    property_override("ro.product.device", "Moto G5 Plus");
+	// fingerprint
+    property_override("ro.build.description", "potter-7.0/NPNS25.137-33-11/11:user/release-keys");
+    property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "motorola/potter/potter:7.0/NPNS25.137-33-11/11:user/release-keys");
+
+    }
 
     if (sku == "XT1687") {
         property_set("ro.hw.ecompass", "true");
