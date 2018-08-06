@@ -216,6 +216,13 @@ on boot
    chown system oem_5004 /sys/bus/spi/devices/spi8.0/irq_cnt
    chmod 0440 /sys/bus/spi/devices/spi8.0/irq_cnt
 
+   chown system oem_5004 /sys/bus/spi/devices/spi6.0/nav
+   chown system oem_5004 /sys/bus/spi/devices/spi6.0/clk_enable
+   chown system oem_5004 /sys/bus/spi/devices/spi6.0/dev_enable
+   chown system oem_5004 /sys/bus/spi/devices/spi6.0/irq
+   chown system oem_5004 /sys/bus/spi/devices/spi6.0/irq_cnt
+   chmod 0440 /sys/bus/spi/devices/spi6.0/irq_cnt
+
  # Change ownership and permission for backlight
    chown system system /sys/class/backlight/lcd-backlight:0/brightness
    chmod 0664 /sys/class/backlight/lcd-backlight:0/brightness
