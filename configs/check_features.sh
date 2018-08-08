@@ -4,7 +4,6 @@ sku=`getprop ro.boot.hardware.sku`
 device=`getprop ro.boot.device`
 
 cameralibs="/system/vendor/lib/hw/camera.msm8953.so
-/system/vendor/lib/libmmcamera2_cpp_module.so
 /system/vendor/lib/libmmcamera2_q3a_core.so
 /system/vendor/lib/libmmcamera2_sensor_modules.so
 /system/vendor/lib/libmmcamera2_stats_modues.so
@@ -14,8 +13,7 @@ cameralibs="/system/vendor/lib/hw/camera.msm8953.so
 /system/vendor/lib/libmotocalibration.so"
 
 sedcam() {
-sed -i 's/po5695/ce5695/g' "$1"
-sed -i 's/pot362/ced258/g' "$1"
+sed -i 's/imx362/imx258/g' "$1"
 }
 
 if [ "$sku" = "XT1687" ]; then
@@ -46,4 +44,9 @@ if [ "$device" = "cedric" ]; then
 		sedcam "$file"
 	done <<< "$cameralibs"
 	sed -i 's/msm8953_mot_potter_camera/msm8937_mot_cedric_camera/' /system/vendor/lib/libmmcamera2_sensor_modules.so
+	sed -i 's/blankl/imx258/' /system/vendor/lib/libmmcamera2_cpp_module.so
+	mv /vendor/lib/cedric/* /vendor/lib/
+elif [ "$device" = "potter" ]; then
+	sed -i 's/blankl/imx362/' /system/vendor/lib/libmmcamera2_cpp_module.so
+	rm -rf /vendor/lib/cedric/
 fi
